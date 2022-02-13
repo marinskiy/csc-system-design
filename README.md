@@ -1,1 +1,0 @@
-# csc-system-design
