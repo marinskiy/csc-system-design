@@ -29,7 +29,7 @@
 <li> остальные символы в NO_QUOTE_OPEN и все символы (кроме соответствующих кавычек) в SINGLE_QUOTE_OPEN, DOUBLE_QUOTE_OPEN записываются в текущий токен, </li>
 <li> символы перехода между состояниями и символы '| \n\t' в состоянии NO_QUOTE_OPEN не записываются в ответ. </li>
 </ol>
-Если исходная строка закончилась, но состояние не NO_QUOTE_OPEN, tokenize бросает исключение ParsingError, которое через createPreprocessedPipelineString пробрасывается наружу в readExecPrintLoop.run().
+Если исходная строка закончилась, но состояние не NO_QUOTE_OPEN или если в preprocessedPipelineString более одной preprocessedCommandString, но последняя пустая, tokenize бросает исключение ParsingError, которое через createPreprocessedPipelineString пробрасывается наружу в readExecPrintLoop.run().
 
 ### Вторая фаза
 
