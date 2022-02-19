@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 
 # set the project name and version
 project(Shell VERSION 1.0)
@@ -7,4 +7,8 @@ project(Shell VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(shell src/main.cpp)
+include_directories(src)
+
+add_subdirectory(src)
+add_subdirectory(test)
+

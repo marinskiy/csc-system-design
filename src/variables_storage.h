@@ -7,7 +7,7 @@ class VariablesStorage {
  public:
   const std::string& GetVariable(const std::string& variable_name) const {
     auto value = variables_.find(variable_name);
-    return value == variables_.end() ? value->second : default_value_;
+    return value == variables_.end() ? default_value_ : value->second;
   }
 
   void SetVariable(std::string variable_name, std::string variable_value) {
