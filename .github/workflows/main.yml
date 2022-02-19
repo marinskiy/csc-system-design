@@ -7,12 +7,20 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: say hello
-      run: echo "Hello!"
+    - uses: actions/checkout@v2
+
+    - name: show
+      run: ls -la
+
+    - name: build
+      run: ./build
     
-  check_windows:
-    runs-on: windows-latest
+    - name: run
+      run: ./shell
     
-    steps:
-    - name: say hello
-      run: echo "Hello!"
+      #  check_windows:
+      #    runs-on: windows-latest
+      #    
+      #    steps:
+      #    - name: build
+      #      run: ./build
