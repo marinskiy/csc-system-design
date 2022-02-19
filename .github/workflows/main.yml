@@ -15,9 +15,6 @@ jobs:
     - name: build
       run: ./build
     
-    - name: run
-      run: ./shell
-    
       #  check_windows:
       #    runs-on: windows-latest
       #    
