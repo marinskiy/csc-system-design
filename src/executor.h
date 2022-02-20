@@ -1,21 +1,19 @@
 #pragma once
 
+#include <sstream>
 #include "variables_storage.h"
 #include "preprocessor.h"
 
 struct CommandResult {
-  std::string output;
+  std::stringstream outStream;
+  std::stringstream errStream;
+  int exitCode = 0;
+  bool needExit = false;
 };
-
-struct PipelineResult {
-  CommandResult command_result;
-  bool exit;
-};
-
 
 class Executor {
  public:
-  PipelineResult Execute(const ExecutionPipeline& pipeline, VariablesStorage& variables) {
-    return PipelineResult();
+  CommandResult Execute(const ExecutionPipeline& pipeline, VariablesStorage& variables) {
+    return CommandResult();
   }   
 };

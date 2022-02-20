@@ -13,7 +13,7 @@ class ReadExecPrintLoop {
     while (getline(std::cin, command_string)) {
       auto command = preprocessor_.ParseCommandString(command_string, variables_storage_);
       auto result = executor_.Execute(command, variables_storage_);
-      if (result.exit) {
+      if (result.needExit) {
         break;
       }
       std::cout << "done " << command_string << std::endl;
