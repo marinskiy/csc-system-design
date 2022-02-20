@@ -5,10 +5,10 @@
 #include "preprocessor.h"
 
 struct CommandResult {
-  std::stringstream outStream;
-  std::stringstream errStream;
-  int exitCode = 0;
-  bool needExit = false;
+  std::stringstream out_stream;
+  std::stringstream err_stream;
+  int exit_code = 0;
+  bool need_exit = false;
 };
 
 class Executor {
