@@ -10,7 +10,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(shell_tests variables_storage.test.cpp)
-target_link_libraries(shell_tests shell_lib gtest_main)
+target_link_libraries(shell_tests gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(shell_tests)

@@ -1,3 +1,8 @@
-add_executable(shell main.cpp)
-add_library(shell_lib STATIC variables_storage.h preprocessor.h executor.h)
-set_target_properties(shell_lib PROPERTIES LINKER_LANGUAGE CXX)
+add_executable(shell
+        main.cpp
+        commands/command_base.h commands/command_base.cpp
+        commands/command_result.h
+        commands/echo_command.h commands/echo_command.cpp
+        executor.h
+        preprocessor.h
+        variables_storage.h)

@@ -5,7 +5,7 @@
 #include "preprocessor.h"
 #include "variables_storage.h"
 
-
+namespace shell {
 class ReadExecPrintLoop {
  public:
   void run() {
@@ -25,8 +25,9 @@ class ReadExecPrintLoop {
   Preprocessor preprocessor_;
   Executor executor_;
 };
+}
 
 int main() {
-  ReadExecPrintLoop read_exec_print_loop;
+  shell::ReadExecPrintLoop read_exec_print_loop;
   read_exec_print_loop.run();
 }

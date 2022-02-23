@@ -7,9 +7,10 @@
 
 #include "variables_storage.h"
 
+namespace shell {
 class ParsingError : public std::runtime_error {
  public:
-  ParsingError(const std::string& what) : std::runtime_error(what) {}
+  ParsingError(const std::string &what) : std::runtime_error(what) {}
 };
 
 class CommandParams {
@@ -19,7 +20,7 @@ class CommandParams {
       command_params_.push_back(std::move(token));
   }
 
-  const std::vector<std::string>& GetTokens() const {
+  const std::vector<std::string> &GetTokens() const {
     return command_params_;
   }
 
@@ -35,7 +36,7 @@ class ExecutionPipeline {
     commands_.push_back(std::move(command));
   }
 
-  const std::vector<CommandParams>& GetCommands() const {
+  const std::vector<CommandParams> &GetCommands() const {
     return commands_;
   }
 
@@ -46,8 +47,8 @@ class ExecutionPipeline {
 class Preprocessor {
  public:
   ExecutionPipeline ParseCommandString(
-      const std::string& command_string,
-      const VariablesStorage& variables_storage) {
+      const std::string &command_string,
+      const VariablesStorage &variables_storage) {
     auto pipeline = Tokenize(command_string);
     return Substitute(pipeline, variables_storage);
   }
@@ -63,12 +64,12 @@ class Preprocessor {
   const char SINGLE_QUOTE = '\'';
   const char DOUBLE_QUOTE = '\"';
 
-  ExecutionPipeline Tokenize(const std::string& command_string) {
+  ExecutionPipeline Tokenize(const std::string &command_string) {
     ExecutionPipeline pipeline;
     ParsingState state = ParsingState::NO_QUOTE_OPEN;
     CommandParams current_command;
     std::string current_token = "";
-    for (char c : command_string) {
+    for (char c: command_string) {
       if (state == ParsingState::NO_QUOTE_OPEN) {
         if (c == COMMAND_SEPARATOR || std::isspace(c)) {
           current_command.AddToken(std::move(current_token));
@@ -82,8 +83,7 @@ class Preprocessor {
         } else {
           current_token.push_back(c);
         }
-      }
-      else {
+      } else {
         char closure_symbol = state == ParsingState::SINGLE_QUOTE_OPEN ? SINGLE_QUOTE : DOUBLE_QUOTE;
         if (c == closure_symbol)
           state = ParsingState::NO_QUOTE_OPEN;
@@ -102,7 +102,8 @@ class Preprocessor {
 
   ExecutionPipeline Substitute(
       ExecutionPipeline pipeline,
-      const VariablesStorage& variables_storage) {
+      const VariablesStorage &variables_storage) {
     return pipeline;
   }
 };
+}

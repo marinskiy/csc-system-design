@@ -2,7 +2,7 @@
 #include "variables_storage.h"
 
 TEST(VariablesStorageTest, DefaultValueTest) {
-  VariablesStorage storage;
+  shell::VariablesStorage storage;
   const auto name = "name";
   const auto value = "value";
   storage.SetVariable(name, value);
