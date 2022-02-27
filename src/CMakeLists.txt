@@ -1,5 +1,6 @@
 add_library(shell_lib STATIC
         commands/command_result.h
+        commands/cat_command.h commands/cat_command.cpp
         commands/command_base.h commands/command_base.cpp
         commands/echo_command.h commands/echo_command.cpp
         commands/exit_command.h commands/exit_command.cpp
