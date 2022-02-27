@@ -9,7 +9,7 @@ shell::PwdCommand::PwdCommand(std::vector<std::string> arguments,
 };
 
 shell::CommandResult shell::PwdCommand::executeInternalLogic() {
-  std::cout << std::filesystem::current_path().string() << std::endl;
+  out_stream_ << std::filesystem::current_path().string() << std::endl;
   return {std::move(out_stream_), std::move(err_stream_), 0, false};
 }
 

@@ -2,6 +2,7 @@
 #include "cat_command.h"
 #include "echo_command.h"
 #include "exit_command.h"
+#include "external_command.h"
 #include "pwd_command.h"
 
 shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
@@ -13,7 +14,10 @@ shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
   }
 
   std::string command_name = tokens[0];
-  tokens.erase(tokens.begin());
+
+  if (command_name == "cat" || command_name == "echo" || command_name == "exit" || command_name == "pwd") {
+    tokens.erase(tokens.begin());
+  }
 
   if (command_name == "cat") {
     return new shell::CatCommand(tokens, std::move(in_stream), std::move(err_stream));
@@ -24,7 +28,6 @@ shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
   } else if (command_name == "pwd") {
     return new shell::PwdCommand(tokens, std::move(in_stream), std::move(err_stream));
   } else {
-    // TODO: replace with ExternalCommand
-    return new shell::EchoCommand(tokens, std::move(in_stream), std::move(err_stream));
+    return new shell::ExternalCommand(tokens, std::move(in_stream), std::move(err_stream));
   }
 }

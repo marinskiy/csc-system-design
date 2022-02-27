@@ -18,17 +18,17 @@ shell::CommandResult shell::CatCommand::executeInternalLogic() {
     auto path = std::filesystem::path(argument);
 
     if (!std::filesystem::exists(path)) {
-      std::cerr << "cat: " << argument << ": No such file or directory" << std::endl;
+      err_stream_ << "cat: " << argument << ": No such file or directory" << std::endl;
       continue;
     }
 
     if (std::filesystem::is_directory(path)) {
-      std::cerr << "cat: " << argument << ": Is a directory" << std::endl;
+      err_stream_ << "cat: " << argument << ": Is a directory" << std::endl;
       continue;
     }
 
     std::ifstream f(path);
-    std::cout << f.rdbuf();
+    out_stream_ << f.rdbuf();
     f.close();
 
   }

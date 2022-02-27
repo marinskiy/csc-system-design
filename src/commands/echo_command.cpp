@@ -10,12 +10,12 @@ shell::EchoCommand::EchoCommand(std::vector<std::string> arguments,
 shell::CommandResult shell::EchoCommand::executeInternalLogic() {
 
   for (int i = 0; i < arguments_.size(); i++) {
-    std::cout << arguments_[i];
+    out_stream_ << arguments_[i];
     if (i != arguments_.size() - 1) {
-      std::cout << " ";
+      out_stream_ << " ";
     }
     else {
-      std::cout << std::endl;
+      out_stream_ << std::endl;
     }
   }
 

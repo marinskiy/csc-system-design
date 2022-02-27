@@ -14,6 +14,7 @@ add_executable(shell_tests
         commands/cat_command.test.cpp
         commands/echo_command.test.cpp
         commands/exit_command.test.cpp
+        commands/external_command.test.cpp
         commands/pwd_command.test.cpp
         )
 target_link_libraries(shell_tests shell_lib gtest_main)
