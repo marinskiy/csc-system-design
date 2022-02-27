@@ -2,8 +2,8 @@
 #include "echo_command.h"
 
 shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
-                                                         std::unique_ptr<std::stringstream> in_stream,
-                                                         std::unique_ptr<std::stringstream> err_stream) {
+                                                         std::stringstream in_stream,
+                                                         std::stringstream err_stream) {
   auto tokens = params.GetTokens();
   if (tokens.size() == 0) {
     //TODO: throw exception

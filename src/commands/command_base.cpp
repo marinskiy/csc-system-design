@@ -2,8 +2,8 @@
 #include <iostream>
 
 shell::CommandBase::CommandBase(std::vector<std::string> arguments,
-                                std::unique_ptr<std::stringstream> in_stream,
-                                std::unique_ptr<std::stringstream> err_stream) :
+                                std::stringstream in_stream,
+                                std::stringstream err_stream) :
     arguments_(arguments), in_stream_(std::move(in_stream)), err_stream_(std::move(err_stream)) {};
 
 shell::CommandResult shell::CommandBase::execute() {
@@ -13,11 +13,10 @@ shell::CommandResult shell::CommandBase::execute() {
   isExecuted = true;
 
   std::streambuf *old_cout_stream_buf = std::cout.rdbuf();
-  out_stream_ = std::make_unique<std::stringstream>();
-  std::cout.rdbuf(out_stream_->rdbuf());
+  std::cout.rdbuf(out_stream_.rdbuf());
 
   std::streambuf *old_cerr_stream_buf = std::cerr.rdbuf();
-  std::cerr.rdbuf(err_stream_->rdbuf());
+  std::cerr.rdbuf(err_stream_.rdbuf());
 
   auto result = executeInternalLogic();
 

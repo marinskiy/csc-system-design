@@ -3,8 +3,8 @@
 #include <iostream>
 
 shell::EchoCommand::EchoCommand(std::vector<std::string> arguments,
-                                std::unique_ptr<std::stringstream> in_stream,
-                                std::unique_ptr<std::stringstream> err_stream) :
+                                std::stringstream in_stream,
+                                std::stringstream err_stream) :
     shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream), std::move(err_stream)) {
 };
 

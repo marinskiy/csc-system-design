@@ -9,7 +9,7 @@ namespace shell {
 class CommandFactory {
  public:
   CommandBase *createCommand(CommandParams command_string,
-                             std::unique_ptr<std::stringstream> in_stream,
-                             std::unique_ptr<std::stringstream> err_stream);
+                             std::stringstream in_stream,
+                             std::stringstream err_stream);
 };
 }
