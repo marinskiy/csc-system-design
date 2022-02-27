@@ -5,6 +5,7 @@
 #include "preprocessor.h"
 #include "commands/command_result.h"
 #include "commands/command_base.h"
+#include "commands/command_factory.h"
 
 namespace shell {
 class Executor {

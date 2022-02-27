@@ -2,8 +2,12 @@
 #include "command_base.h"
 
 namespace shell {
-class EchoCommand: CommandBase {
-  EchoCommand(std::vector<std::string> arguments, std::stringstream in_stream, std::stringstream err_stream);
-  CommandResult execute() override;
+class EchoCommand : public CommandBase {
+ public:
+  EchoCommand(std::vector<std::string> arguments,
+              std::unique_ptr<std::stringstream> in_stream,
+              std::unique_ptr<std::stringstream> err_stream);
+ private:
+  CommandResult executeInternalLogic() override;
 };
 }

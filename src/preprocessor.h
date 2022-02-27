@@ -6,26 +6,12 @@
 #include <vector>
 
 #include "variables_storage.h"
+#include "command_params.h"
 
 namespace shell {
 class ParsingError : public std::runtime_error {
  public:
   ParsingError(const std::string &what) : std::runtime_error(what) {}
-};
-
-class CommandParams {
- public:
-  void AddToken(std::string token) {
-    if (!token.empty())
-      command_params_.push_back(std::move(token));
-  }
-
-  const std::vector<std::string> &GetTokens() const {
-    return command_params_;
-  }
-
- private:
-  std::vector<std::string> command_params_;
 };
 
 class ExecutionPipeline {

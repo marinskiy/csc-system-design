@@ -8,11 +8,18 @@
 namespace shell {
 class CommandBase {
  public:
-  CommandBase(std::vector<std::string> arguments, std::stringstream in_stream, std::stringstream err_stream);
-  virtual CommandResult execute() = 0;
+  CommandBase(std::vector<std::string> arguments, std::unique_ptr<std::stringstream> in_stream, std::unique_ptr<std::stringstream> err_stream);
+  CommandResult execute();
+
+  virtual ~CommandBase() = default;
  protected:
+  virtual CommandResult executeInternalLogic() = 0;
+
   std::vector<std::string> arguments_;
-  std::stringstream in_stream_;
-  std::stringstream err_stream_;
+  bool isExecuted = false;
+
+  std::unique_ptr<std::stringstream> in_stream_;
+  std::unique_ptr<std::stringstream> out_stream_;
+  std::unique_ptr<std::stringstream> err_stream_;
 };
 }
