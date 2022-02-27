@@ -1,5 +1,4 @@
 #include "echo_command.h"
-#include "command_base.h"
 #include <iostream>
 
 shell::EchoCommand::EchoCommand(std::vector<std::string> arguments,
@@ -14,6 +13,9 @@ shell::CommandResult shell::EchoCommand::executeInternalLogic() {
     std::cout << arguments_[i];
     if (i != arguments_.size() - 1) {
       std::cout << " ";
+    }
+    else {
+      std::cout << std::endl;
     }
   }
 

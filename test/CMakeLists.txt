@@ -13,6 +13,7 @@ add_executable(shell_tests
         variables_storage.test.cpp
         commands/echo_command.test.cpp
         commands/exit_command.test.cpp
+        commands/pwd_command.test.cpp
         )
 target_link_libraries(shell_tests shell_lib gtest_main)
 

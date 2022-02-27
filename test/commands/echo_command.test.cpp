@@ -12,6 +12,6 @@ TEST(EchoCommandTest, BasicLogicTest) {
   auto command = new shell::EchoCommand(arguments, std::move(in_stream), std::move(err_stream));
   auto result = command->execute();
 
-  EXPECT_EQ(result.out_stream.str(), "a b");
+  EXPECT_EQ(result.out_stream.str(), "a b\n");
 }
 

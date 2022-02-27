@@ -1,5 +1,4 @@
 #include "exit_command.h"
-#include "command_base.h"
 #include <iostream>
 
 shell::ExitCommand::ExitCommand(std::vector<std::string> arguments,
