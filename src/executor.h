@@ -8,10 +8,13 @@
 #include "commands/command_factory.h"
 
 namespace shell {
-class Executor {
- public:
-  CommandResult Execute(const ExecutionPipeline &pipeline, VariablesStorage &variables) {
-    return CommandResult();
-  }
-};
+    class Executor {
+    public:
+        CommandResult Execute(const PreprocessedPipelineString &pipeline, VariablesStorage &variables);
+
+    private:
+        VariablesStorage GetLocatEnvironment(CommandParams &command) ;
+
+        CommandFactory factory_;
+    };
 }

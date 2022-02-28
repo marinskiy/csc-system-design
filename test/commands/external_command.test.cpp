@@ -4,14 +4,14 @@
 
 TEST(ExternalCommandTest, BasicLogicTest) {
   std::vector<std::string> arguments;
-  arguments.push_back("echo test");
+  arguments.emplace_back("echo test");
 
-  std::stringstream in_stream;
+  std::string in_stream;
   std::stringstream err_stream;
 
-  auto command = new shell::ExternalCommand(arguments, std::move(in_stream), std::move(err_stream));
-  auto result = command->execute();
+  auto command = new shell::ExternalCommand(std::move(arguments), std::move(in_stream));
+  auto result = command->execute({});
 
-  EXPECT_EQ(result.out_stream.str(), "test\n");
+  EXPECT_EQ(result.out_stream, "test\n");
 }
 

@@ -4,19 +4,19 @@
 #include <unordered_map>
 
 namespace shell {
-class VariablesStorage {
- public:
-  const std::string &GetVariable(const std::string &variable_name) const {
-    auto value = variables_.find(variable_name);
-    return value == variables_.end() ? default_value_ : value->second;
-  }
+    class VariablesStorage {
+    public:
+        const std::string &GetVariable(const std::string &variable_name) const;
 
-  void SetVariable(std::string variable_name, std::string variable_value) {
-    variables_.emplace(std::move(variable_name), std::move(variable_value));
-  }
+        void SetVariable(std::string variable_name, std::string variable_value);
 
- private:
-  const std::string default_value_ = "";
-  std::unordered_map<std::string, std::string> variables_;
-};
+        const std::unordered_map<std::string, std::string> &GetVariables() const;
+
+        // sets variables from an external storage. on name conflict does not override previous values
+        void SetVariables(const VariablesStorage &other);
+
+    private:
+        const std::string default_value_;
+        std::unordered_map<std::string, std::string> variables_;
+    };
 }

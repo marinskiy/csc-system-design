@@ -11,6 +11,7 @@ enable_testing()
 
 add_executable(shell_tests
         variables_storage.test.cpp
+        executor_test.cpp
         commands/cat_command.test.cpp
         commands/echo_command.test.cpp
         commands/exit_command.test.cpp
