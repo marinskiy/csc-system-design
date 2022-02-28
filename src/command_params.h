@@ -8,7 +8,7 @@ class CommandParams {
       command_params_.push_back(std::move(token));
   }
 
-  const std::vector<std::string> GetTokens() const {
+  const std::vector<std::string> &GetTokens() const {
     return command_params_;
   }
 

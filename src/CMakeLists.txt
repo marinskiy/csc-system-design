@@ -6,6 +6,7 @@ add_library(shell_lib STATIC
         commands/exit_command.h commands/exit_command.cpp
         commands/external_command.h commands/external_command.cpp
         commands/pwd_command.h commands/pwd_command.cpp
+        commands/wc_command.h commands/wc_command.cpp
         executor.h
         preprocessor.h
         command_params.h

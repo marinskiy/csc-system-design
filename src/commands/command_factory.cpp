@@ -4,6 +4,7 @@
 #include "exit_command.h"
 #include "external_command.h"
 #include "pwd_command.h"
+#include "wc_command.h"
 
 shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
                                                          std::stringstream in_stream,
@@ -27,7 +28,11 @@ shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
     return new shell::ExitCommand(tokens, std::move(in_stream), std::move(err_stream));
   } else if (command_name == "pwd") {
     return new shell::PwdCommand(tokens, std::move(in_stream), std::move(err_stream));
+  } else if (command_name == "wc") {
+    return new shell::WcCommand(tokens, std::move(in_stream), std::move(err_stream));
   } else {
-    return new shell::ExternalCommand(tokens, std::move(in_stream), std::move(err_stream));
+    return new
+        shell::ExternalCommand(tokens, std::move(in_stream), std::move(err_stream)
+    );
   }
 }
