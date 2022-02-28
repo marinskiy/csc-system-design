@@ -7,8 +7,7 @@
 #include "wc_command.h"
 
 shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
-                                                         std::stringstream in_stream,
-                                                         std::stringstream err_stream) {
+                                                         std::string&& in_stream) {
   auto tokens = params.GetTokens();
   if (tokens.size() == 0) {
     //TODO: throw exception
@@ -21,18 +20,16 @@ shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
   }
 
   if (command_name == "cat") {
-    return new shell::CatCommand(tokens, std::move(in_stream), std::move(err_stream));
+    return new shell::CatCommand(std::move(tokens), std::move(in_stream));
   } else if (command_name == "echo") {
-    return new shell::EchoCommand(tokens, std::move(in_stream), std::move(err_stream));
+    return new shell::EchoCommand(std::move(tokens), std::move(in_stream));
   } else if (command_name == "exit") {
-    return new shell::ExitCommand(tokens, std::move(in_stream), std::move(err_stream));
+    return new shell::ExitCommand(std::move(tokens), std::move(in_stream));
   } else if (command_name == "pwd") {
-    return new shell::PwdCommand(tokens, std::move(in_stream), std::move(err_stream));
+    return new shell::PwdCommand(std::move(tokens), std::move(in_stream));
   } else if (command_name == "wc") {
-    return new shell::WcCommand(tokens, std::move(in_stream), std::move(err_stream));
+    return new shell::WcCommand(std::move(tokens), std::move(in_stream));
   } else {
-    return new
-        shell::ExternalCommand(tokens, std::move(in_stream), std::move(err_stream)
-    );
+    return new shell::ExternalCommand(std::move(tokens), std::move(in_stream));
   }
 }

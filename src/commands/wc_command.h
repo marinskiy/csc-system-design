@@ -5,10 +5,9 @@ namespace shell {
 class WcCommand : public CommandBase {
  public:
   WcCommand(std::vector<std::string> arguments,
-             std::stringstream in_stream,
-             std::stringstream err_stream);
+             std::string in_stream);
  private:
-  CommandResult executeInternalLogic() override;
+  CommandResult executeInternalLogic(const VariablesStorage& variables) override;
   int countWords(const std::string &s);
 };
 }

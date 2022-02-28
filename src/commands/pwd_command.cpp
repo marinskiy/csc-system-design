@@ -2,14 +2,14 @@
 #include <iostream>
 #include <filesystem>
 
-shell::PwdCommand::PwdCommand(std::vector<std::string> arguments,
-                                std::stringstream in_stream,
-                                std::stringstream err_stream) :
-    shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream), std::move(err_stream)) {
-};
-
-shell::CommandResult shell::PwdCommand::executeInternalLogic() {
-  out_stream_ << std::filesystem::current_path().string() << std::endl;
-  return {std::move(out_stream_), std::move(err_stream_), 0, false};
+shell::CommandResult shell::PwdCommand::executeInternalLogic(const VariablesStorage& variables) {
+    std::ostringstream out;
+  out << std::filesystem::current_path().string() << std::endl;
+  return {out.str(), "", 0, false};
 }
+
+shell::PwdCommand::PwdCommand(std::vector<std::string>&& arguments,
+                              std::string&& in_stream) :
+        shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream)) {
+};
 

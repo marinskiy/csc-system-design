@@ -1,24 +1,23 @@
 #include "echo_command.h"
 #include <iostream>
 
-shell::EchoCommand::EchoCommand(std::vector<std::string> arguments,
-                                std::stringstream in_stream,
-                                std::stringstream err_stream) :
-    shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream), std::move(err_stream)) {
-};
-
-shell::CommandResult shell::EchoCommand::executeInternalLogic() {
-
+shell::CommandResult shell::EchoCommand::executeInternalLogic(const VariablesStorage& variables) {
+    std::ostringstream out, err;
   for (int i = 0; i < arguments_.size(); i++) {
-    out_stream_ << arguments_[i];
+    out << arguments_[i];
     if (i != arguments_.size() - 1) {
-      out_stream_ << " ";
+      out << " ";
     }
     else {
-      out_stream_ << std::endl;
+      out << std::endl;
     }
   }
 
-  return {std::move(out_stream_), std::move(err_stream_), 0, false};
+  return {out.str(), err.str(), 0, false};
 }
+
+shell::EchoCommand::EchoCommand(std::vector<std::string>&& arguments,
+                                std::string&& in_stream) :
+        shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream)) {
+};
 

@@ -5,26 +5,26 @@
 #include <iterator>
 
 shell::WcCommand::WcCommand(std::vector<std::string> arguments,
-                            std::stringstream in_stream,
-                            std::stringstream err_stream) :
-    shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream), std::move(err_stream)) {
+                            std::string in_stream) :
+    shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream)) {
 };
 
-shell::CommandResult shell::WcCommand::executeInternalLogic() {
+shell::CommandResult shell::WcCommand::executeInternalLogic(const VariablesStorage& variables) {
   if (arguments_.size() == 0) {
     std::cerr << "wc: Need at least one argument." << std::endl;
   }
 
+  std::ostringstream out, err;
   for (const auto &argument: arguments_) {
     auto path = std::filesystem::path(argument);
 
     if (!std::filesystem::exists(path)) {
-      err_stream_ << "wc: " << argument << ": No such file or directory" << std::endl;
+      err << "wc: " << argument << ": No such file or directory" << std::endl;
       continue;
     }
 
     if (std::filesystem::is_directory(path)) {
-      err_stream_ << "wc: " << argument << ": Is a directory" << std::endl;
+      err << "wc: " << argument << ": Is a directory" << std::endl;
       continue;
     }
 
@@ -40,10 +40,10 @@ shell::CommandResult shell::WcCommand::executeInternalLogic() {
 
     const auto file_size = std::filesystem::file_size(path);
 
-    out_stream_ << number_of_lines << " " << number_of_lines << " " << file_size << std::endl;
+    out << number_of_lines << " " << number_of_lines << " " << file_size << std::endl;
   }
 
-  return {std::move(out_stream_), std::move(err_stream_), 0, false};
+  return {out.str(), err.str(), 0, false};
 }
 
 int shell::WcCommand::countWords(const std::string &s) {

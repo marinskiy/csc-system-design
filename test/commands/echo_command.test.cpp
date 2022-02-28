@@ -6,12 +6,11 @@ TEST(EchoCommandTest, BasicLogicTest) {
   arguments.push_back("a");
   arguments.push_back("b");
 
-  std::stringstream in_stream;
-  std::stringstream err_stream;
+  std::string in_stream;
 
-  auto command = new shell::EchoCommand(arguments, std::move(in_stream), std::move(err_stream));
-  auto result = command->execute();
+  auto command = new shell::EchoCommand(std::move(arguments), std::move(in_stream));
+  auto result = command->execute({});
 
-  EXPECT_EQ(result.out_stream.str(), "a b\n");
+  EXPECT_EQ(result.out_stream, "a b\n");
 }
 

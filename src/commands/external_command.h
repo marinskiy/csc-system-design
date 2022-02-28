@@ -3,11 +3,11 @@
 
 namespace shell {
 class ExternalCommand : public CommandBase {
- public:
-  ExternalCommand(std::vector<std::string> arguments,
-              std::stringstream in_stream,
-              std::stringstream err_stream);
  private:
-  CommandResult executeInternalLogic() override;
+    CommandResult executeInternalLogic(const VariablesStorage& variables) override;
+
+public:
+    ExternalCommand(std::vector<std::string>&& arguments,
+                    std::string&& in_stream);
 };
 }
