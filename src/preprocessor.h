@@ -37,9 +37,10 @@ class Preprocessor {
     DOUBLE_QUOTE_OPEN = 2,
   };
 
-  const char COMMAND_SEPARATOR = '|';
   const char SINGLE_QUOTE = '\'';
   const char DOUBLE_QUOTE = '\"';
+  const char COMMAND_SEPARATOR = '|';
+  const char ENV_VARIABLE_START = '$';
 
   PreprocessedPipelineString Tokenize(const std::string &command_string);
   std::string Substitute(

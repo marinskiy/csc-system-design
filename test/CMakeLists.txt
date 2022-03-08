@@ -10,15 +10,16 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(shell_tests
-        variables_storage.test.cpp
         executor_test.cpp
+        preprocessor_test.cpp
+        variables_storage_test.cpp
         commands/cat_command.test.cpp
         commands/echo_command.test.cpp
         commands/exit_command.test.cpp
         commands/external_command.test.cpp
         commands/pwd_command.test.cpp
         commands/wc_command.test.cpp
-        )
+)
 target_link_libraries(shell_tests shell_lib gtest_main)
 
 include(GoogleTest)

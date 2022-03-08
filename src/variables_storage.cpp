@@ -10,16 +10,20 @@ namespace shell {
     }
 
     void VariablesStorage::SetVariable(std::string variable_name, std::string variable_value) {
-        variables_.emplace(std::move(variable_name), std::move(variable_value));
+        variables_[std::move(variable_name)] = std::move(variable_value);
     }
 
     const std::unordered_map<std::string, std::string> &VariablesStorage::GetVariables() const {
         return variables_;
     }
 
-    void VariablesStorage::SetVariables(const VariablesStorage &other) {
+    bool VariablesStorage::IsValidEnvNameNextCharacter(char c, const std::string& prefix) {
+       return std::isalpha(c) || c == '_' || (!prefix.empty() && std::isdigit(c));
+    } 
+
+    void VariablesStorage::SetVariables(const VariablesStorage &other, bool replace_old) {
         for (const auto&[name, value]: other.variables_) {
-            if (!variables_.count(name)) {
+            if (replace_old || !variables_.count(name)) {
                 SetVariable(name, value);
             }
         }

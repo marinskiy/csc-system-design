@@ -12,8 +12,10 @@ namespace shell {
 
         const std::unordered_map<std::string, std::string> &GetVariables() const;
 
+        static bool IsValidEnvNameNextCharacter(char c, const std::string& prefix);
+
         // sets variables from an external storage. on name conflict does not override previous values
-        void SetVariables(const VariablesStorage &other);
+        void SetVariables(const VariablesStorage &other, bool replace_old=false);
 
     private:
         const std::string default_value_;
