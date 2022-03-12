@@ -1,3 +1,4 @@
 .artifacts
 shell
+shell_tests
 src/main
