@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
+
 #include "executor.h"
+#include "variables_storage.h"
 
 TEST(ExecutorTest, BasicLogicTest) {
     shell::VariablesStorage storage;

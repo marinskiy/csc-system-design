@@ -9,11 +9,15 @@ namespace shell {
         for (auto &command: commands) {
             auto local = GetLocatEnvironment(command);
             local.SetVariables(variables);
+            if (commands.size() == 1 && command.empty()) {
+                variables.SetVariables(local, /*replace_old=*/true);
+                return CommandResult();
+            }
             auto func = factory_.createCommand(command, "");
             auto result = func->execute(local);
             return result;
         }
-        return CommandResult{};
+        return CommandResult();
     }
 
     VariablesStorage Executor::GetLocatEnvironment(CommandParams &command) {

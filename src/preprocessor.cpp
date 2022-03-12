@@ -24,7 +24,6 @@ namespace shell {
         return Tokenize(command_string);
     }
 
-
     PreprocessedPipelineString Preprocessor::Tokenize(const std::string &command_string) {
         PreprocessedPipelineString pipeline;
         ParsingState state = ParsingState::NO_QUOTE_OPEN;
@@ -55,8 +54,11 @@ namespace shell {
         if (state != ParsingState::NO_QUOTE_OPEN)
             throw ParsingError("Invalid command: state != NO_QUOTE_OPEN");
         current_command.AddToken(current_token);
-        if (!pipeline.GetCommands().empty() && current_command.GetTokens().empty())
-            throw ParsingError("Invalid command: command params cannot be empty");
+        if (current_command.GetTokens().empty()) {
+            if (!pipeline.GetCommands().empty())
+                throw ParsingError("Invalid command: command params cannot be empty");
+            return pipeline;
+        }
         pipeline.AddCommand(current_command);
         return pipeline;
     }
@@ -64,6 +66,34 @@ namespace shell {
     std::string Preprocessor::Substitute(
             const std::string &input,
             const VariablesStorage &variables_storage) {
-        return input;
+        std::string result;
+        std::string env_variable_name;
+        ParsingState state = ParsingState::NO_QUOTE_OPEN;
+        bool collect_env_name = false;
+        for (char c : input) {
+            if (collect_env_name && !VariablesStorage::IsValidEnvNameNextCharacter(c, env_variable_name)) {
+                result += variables_storage.GetVariable(std::move(env_variable_name));
+                collect_env_name = false;
+            }
+            if (c == ENV_VARIABLE_START &&
+                    (state == ParsingState::NO_QUOTE_OPEN || state == ParsingState::DOUBLE_QUOTE_OPEN)) {
+                env_variable_name = "";
+                collect_env_name = true;
+            } else {
+                if (collect_env_name)
+                    env_variable_name.push_back(c);
+                else
+                    result.push_back(c);
+            }
+            if (c == DOUBLE_QUOTE) {
+                if (state == ParsingState::DOUBLE_QUOTE_OPEN)
+                    state = ParsingState::NO_QUOTE_OPEN;
+                else
+                    state = ParsingState::DOUBLE_QUOTE_OPEN;
+            }
+        }
+        if (collect_env_name)
+            result += variables_storage.GetVariable(env_variable_name);
+        return result;
     }
 }

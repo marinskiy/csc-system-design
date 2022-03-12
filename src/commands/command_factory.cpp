@@ -1,3 +1,6 @@
+#include <iostream>
+
+
 #include "command_factory.h"
 #include "cat_command.h"
 #include "echo_command.h"
@@ -7,7 +10,7 @@
 #include "wc_command.h"
 
 shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
-                                                         std::string&& in_stream) {
+                                                         std::string in_stream) {
   auto tokens = params.GetTokens();
   if (tokens.size() == 0) {
     //TODO: throw exception
