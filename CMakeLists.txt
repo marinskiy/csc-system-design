@@ -8,9 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 FIND_PACKAGE(Boost COMPONENTS system io thread)
-IF (Boost_FOUND)
-    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
-ENDIF()
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
 
 include_directories(src)
 
