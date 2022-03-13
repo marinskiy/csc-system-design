@@ -30,7 +30,6 @@ jobs:
           mingw-w64-x86_64-cmake
           mingw-w64-x86_64-ninja
           mingw-w64-x86_64-msmpi
-          mingw-w64-x86_64-boost
     - name: Put MSYS2_MinGW64 on PATH
       # there is not yet an environment variable for this path from msys2/setup-msys2
       run: echo "D:/a/_temp/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
@@ -47,6 +46,9 @@ jobs:
 
     - name: put MSMPI_BIN on PATH (where mpiexec is)
       run: echo "C:\Program Files\Microsoft MPI\Bin\" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: install boost
+      run: pacman -S mingw-w64-x86_64-boost
 
     - uses: actions/checkout@v2
       name: Checkout source code
