@@ -11,6 +11,7 @@ jobs:
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.1.0
+      id: install-boost
       with:
         boost_version: 1.78.0
 
