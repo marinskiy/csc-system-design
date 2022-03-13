@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   check_ubuntu:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v2
@@ -14,7 +14,6 @@ jobs:
       id: install-boost
       with:
         boost_version: 1.78.0
-        platform_version: 20.04
 
     - name: build
       run: bash build.sh

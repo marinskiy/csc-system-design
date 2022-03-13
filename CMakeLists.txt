@@ -7,7 +7,11 @@ project(Shell VERSION 1.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(Boost COMPONENTS system io thread)
+FIND_PACKAGE(Boost COMPONENTS system io thread)
+IF (Boost_FOUND)
+    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
+    ADD_DEFINITIONS( "-DHAS_BOOST" )
+ENDIF()
 
 include_directories(src)
 
