@@ -7,7 +7,7 @@ project(Shell VERSION 1.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(Boost COMPONENTS system io thread)
+find_package(Boost COMPONENTS process)
 
 include_directories(src)
 
