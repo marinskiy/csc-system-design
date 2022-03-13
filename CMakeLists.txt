@@ -10,11 +10,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # work-around: FindBoost: Boost_ARCHITECTURE not detected on MinGW
 # https://gitlab.kitware.com/cmake/cmake/-/issues/20587
 if(MINGW)
-    if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-        set(Boost_ARCHITECTURE "-x64")
-    else()
-        set(Boost_ARCHITECTURE "-x32")
-    endif()
+    #set( boost_LAYOUT "system")
+    set( Boost_NO_BOOST_CMAKE false)
+else()
+    #set( boost_LAYOUT "versioned")
+    set( Boost_NO_BOOST_CMAKE true)
 endif()
 
 FIND_PACKAGE(Boost COMPONENTS system io thread)
