@@ -15,4 +15,5 @@ add_library(shell_lib STATIC
         commands/command_factory.h commands/command_factory.cpp)
 
 add_executable(shell main.cpp)
+find_package(Boost)
 target_link_libraries(shell shell_lib pthread ${Boost_LIBRARIES})
