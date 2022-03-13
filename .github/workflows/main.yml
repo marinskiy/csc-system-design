@@ -27,7 +27,6 @@ jobs:
         update: true
         install: >-
           git
-          mingw-w64-x86_64-toolchain
           mingw-w64-x86_64-boost
           mingw-w64-x86_64-cmake
           mingw-w64-x86_64-ninja
@@ -48,6 +47,9 @@ jobs:
 
     - name: put MSMPI_BIN on PATH (where mpiexec is)
       run: echo "C:\Program Files\Microsoft MPI\Bin\" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: install boost
+      run:  vcpkg install boost:x64-windows
 
     - uses: actions/checkout@v2
       name: Checkout source code
