@@ -15,3 +15,16 @@ TEST(ExecutorTest, BasicLogicTest) {
     EXPECT_EQ(result.exit_code, 0);
     EXPECT_EQ(result.need_exit, false);
 }
+
+TEST(ExecutorPipeTest, BasicLogicTest) {
+    shell::VariablesStorage storage;
+    shell::PreprocessedPipelineString pipeline;
+    pipeline.AddCommand(shell::CommandParams{{"echo", "lalala"}});
+    pipeline.AddCommand(shell::CommandParams{{"cat"}});
+    shell::Executor executor{};
+    const auto result = executor.Execute(pipeline, storage);
+    EXPECT_EQ(result.out_stream, "lalala\n");
+    EXPECT_EQ(result.err_stream, "");
+    EXPECT_EQ(result.exit_code, 0);
+    EXPECT_EQ(result.need_exit, false);
+}

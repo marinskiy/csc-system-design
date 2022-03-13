@@ -17,16 +17,10 @@ namespace shell {
                 return std::nullopt;
             }
             const auto &token = *command_params_.begin();
-            std::string env_variable_name = "";
-            for (char c : token) {
-                if (VariablesStorage::IsValidEnvNameNextCharacter(c, env_variable_name))
-                    env_variable_name.push_back(c);
-                else
-                    break;
-            }
-            size_t len = env_variable_name.size();
-            if (len && len < token.size() && token[len] == '=') {
-                const auto result = std::make_pair(env_variable_name, token.substr(len + 1));
+            int i = 0;
+            for (; i < token.size() && IsValidNameCharacter(token[i]); ++i) {}
+            if (i > 0 && i < token.size() && token[i] == '=') {
+                const auto result = std::make_pair(token.substr(0, i), token.substr(i + 1));
                 command_params_.pop_front();
                 return result;
             }
@@ -41,8 +35,14 @@ namespace shell {
             return {command_params_.begin(), command_params_.end()};
         }
 
-        bool empty() const {
+        bool Empty() const {
             return command_params_.empty();
+        }
+
+    private:
+        static bool IsValidNameCharacter(const char symbol) {
+            return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z') ||
+                   (symbol >= '0' && symbol <= '9') || symbol == '_';
         }
 
     private:
