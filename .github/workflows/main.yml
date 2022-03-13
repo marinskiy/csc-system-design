@@ -11,6 +11,8 @@ jobs:
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.1.0
+      with:
+        boost_version: 1.73.0
 
     - name: build
       run: bash build.sh
@@ -49,6 +51,8 @@ jobs:
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.1.0
+      with:
+        boost_version: 1.73.0
 
     - uses: actions/checkout@v2
       name: Checkout source code
