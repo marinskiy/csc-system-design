@@ -9,10 +9,6 @@ shell::CatCommand::CatCommand(std::vector<std::string>&& arguments,
 };
 
 shell::CommandResult shell::CatCommand::executeInternalLogic(const VariablesStorage& variables) {
-  if (arguments_.empty()) {
-    std::cerr << "cat: Need at least one argument." << std::endl;
-  }
-
   std::ostringstream out, err;
   for (const auto &argument: arguments_) {
     auto path = std::filesystem::path(argument);

@@ -18,7 +18,7 @@ shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
 
   std::string command_name = tokens[0];
 
-  if (command_name == "cat" || command_name == "echo" || command_name == "exit" || command_name == "pwd") {
+  if (command_name == "cat" || command_name == "echo" || command_name == "exit" || command_name == "pwd" || command_name == "wc") {
     tokens.erase(tokens.begin());
   }
 
