@@ -7,6 +7,8 @@ project(Shell VERSION 1.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+find_package(Boost COMPONENTS system io)
+
 include_directories(src)
 
 add_subdirectory(src)
