@@ -19,6 +19,9 @@ TEST(ExternalCommandTest, BasicLogicTest) {
   auto result = command->execute({});
 
   EXPECT_EQ(result.out_stream, expected_result);
+  EXPECT_EQ(result.err_stream, "");
+  EXPECT_EQ(result.exit_code, 0);
+  EXPECT_EQ(result.need_exit, false);
 }
 
 TEST(ExternalCommandTest, VariablesTest) {

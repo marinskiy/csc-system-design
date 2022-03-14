@@ -4,9 +4,9 @@
 #include "variables_storage.h"
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-    static const std::string expected_result = "1 1 6\n";
+static const std::string expected_result = "1 1 6\n";
 #else
-    static const std::string expected_result = "1 1 5\n";
+static const std::string expected_result = "1 1 5\n";
 #endif
 
 TEST(WcCommandTest, BasicLogicTest) {
@@ -23,6 +23,9 @@ TEST(WcCommandTest, BasicLogicTest) {
   auto result = command->execute(shell::VariablesStorage{});
 
   EXPECT_EQ(result.out_stream, expected_result);
+  EXPECT_EQ(result.err_stream, "");
+  EXPECT_EQ(result.exit_code, 0);
+  EXPECT_EQ(result.need_exit, false);
 
   std::remove("test.txt");
 }
@@ -36,4 +39,7 @@ TEST(WcCommandTest, InStreamTest) {
   auto result = command->execute(shell::VariablesStorage{});
 
   EXPECT_EQ(result.out_stream, "1 1 5\n");
+  EXPECT_EQ(result.err_stream, "");
+  EXPECT_EQ(result.exit_code, 0);
+  EXPECT_EQ(result.need_exit, false);
 }

@@ -9,12 +9,12 @@
 namespace shell {
 class CommandBase {
  public:
-  CommandBase(std::vector<std::string>&& arguments, std::string&& in_stream);
-  CommandResult execute(const VariablesStorage& variables);
+  CommandBase(std::vector<std::string> &&arguments, std::string &&in_stream);
+  CommandResult execute(const VariablesStorage &variables);
 
   virtual ~CommandBase() = default;
  protected:
-  virtual CommandResult executeInternalLogic(const VariablesStorage& variables) = 0;
+  virtual CommandResult executeInternalLogic(const VariablesStorage &variables) = 0;
 
   std::vector<std::string> arguments_;
   bool isExecuted = false;

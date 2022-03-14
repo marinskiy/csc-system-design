@@ -3,7 +3,7 @@
 #include "commands/cat_command.h"
 
 TEST(CatCommandTest, BasicLogicTest) {
-  std::ofstream outfile ("test.txt");
+  std::ofstream outfile("test.txt");
   outfile << "test";
   outfile.close();
 
@@ -16,6 +16,9 @@ TEST(CatCommandTest, BasicLogicTest) {
   auto result = command->execute({});
 
   EXPECT_EQ(result.out_stream, "test");
+  EXPECT_EQ(result.err_stream, "");
+  EXPECT_EQ(result.exit_code, 0);
+  EXPECT_EQ(result.need_exit, false);
 
   std::remove("test.txt");
 }

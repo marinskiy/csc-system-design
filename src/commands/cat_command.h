@@ -3,9 +3,9 @@
 
 namespace shell {
 class CatCommand : public CommandBase {
-public:
-    CatCommand(std::vector<std::string>&& arguments, std::string&& in_stream);
-private:
-    CommandResult executeInternalLogic(const VariablesStorage& variables) override;
+ public:
+  CatCommand(std::vector<std::string> &&arguments, std::string &&in_stream);
+ private:
+  CommandResult executeInternalLogic(const VariablesStorage &variables) override;
 };
 }

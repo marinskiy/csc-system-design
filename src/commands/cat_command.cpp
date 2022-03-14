@@ -3,12 +3,12 @@
 #include <filesystem>
 #include <fstream>
 
-shell::CatCommand::CatCommand(std::vector<std::string>&& arguments,
-                              std::string&& in_stream) :
+shell::CatCommand::CatCommand(std::vector<std::string> &&arguments,
+                              std::string &&in_stream) :
     shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream)) {
 };
 
-shell::CommandResult shell::CatCommand::executeInternalLogic(const VariablesStorage& variables) {
+shell::CommandResult shell::CatCommand::executeInternalLogic(const VariablesStorage &variables) {
   std::ostringstream out, err;
   for (const auto &argument: arguments_) {
     auto path = std::filesystem::path(argument);

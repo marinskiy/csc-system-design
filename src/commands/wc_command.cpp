@@ -9,16 +9,15 @@ shell::WcCommand::WcCommand(std::vector<std::string> arguments,
     shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream)) {
 };
 
-shell::CommandResult shell::WcCommand::executeInternalLogic(const VariablesStorage& variables) {
+shell::CommandResult shell::WcCommand::executeInternalLogic(const VariablesStorage &variables) {
   std::ostringstream out, err;
 
   if (arguments_.size() == 0) {
     std::istringstream in(in_stream_);
-    auto [number_of_lines, number_of_words] = calculateStreamStats(in);
+    auto[number_of_lines, number_of_words] = calculateStreamStats(in);
     const auto file_size = in_stream_.size();
     out << number_of_lines << " " << number_of_words << " " << file_size << std::endl;
-  }
-  else {
+  } else {
     for (const auto &argument: arguments_) {
       auto path = std::filesystem::path(argument);
 
@@ -47,7 +46,7 @@ int shell::WcCommand::countWords(const std::string &s) {
                        std::istream_iterator<std::string>{});
 }
 
-std::tuple<size_t, size_t> shell::WcCommand::calculateStreamStats(std::istream& stream) {
+std::tuple<size_t, size_t> shell::WcCommand::calculateStreamStats(std::istream &stream) {
   size_t number_of_lines = 0;
   size_t number_of_words = 0;
 
