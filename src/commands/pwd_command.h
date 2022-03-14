@@ -4,10 +4,10 @@
 namespace shell {
 class PwdCommand : public CommandBase {
  private:
-    CommandResult executeInternalLogic(const VariablesStorage& variables) override;
+  CommandResult executeInternalLogic(const VariablesStorage &variables) override;
 
-public:
-    PwdCommand(std::vector<std::string>&& arguments,
-               std::string&& in_stream);
+ public:
+  PwdCommand(std::vector<std::string> &&arguments,
+             std::string &&in_stream);
 };
 }
