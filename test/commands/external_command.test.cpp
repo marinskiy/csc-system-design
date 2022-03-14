@@ -43,5 +43,9 @@ TEST(ExternalCommandTest, VariablesTest) {
   auto command = new shell::ExternalCommand(std::move(arguments), std::move(in_stream));
   auto result = command->execute(storage);
 
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+  EXPECT_EQ(result.out_stream, "test\r\n");
+#else
   EXPECT_EQ(result.out_stream, "test\n");
+#endif
 }
