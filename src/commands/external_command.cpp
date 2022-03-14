@@ -1,11 +1,12 @@
 #include "external_command.h"
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 shell::CommandResult shell::ExternalCommand::executeInternalLogic(const VariablesStorage &variables) {
   std::string commandString;
   for (const auto&[name, value]: variables.GetVariables()) {
-    setenv(name.c_str(), value.c_str(), 1);
+    putenv((name + "=" + value).data());
   }
 
   std::ostringstream out, err;
