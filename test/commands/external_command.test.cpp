@@ -3,9 +3,9 @@
 #include "commands/external_command.h"
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-    static const std::string expected_result = "test \n";
+static const std::string expected_result = "test \n";
 #else
-    static const std::string expected_result = "test\n";
+static const std::string expected_result = "test\n";
 #endif
 
 TEST(ExternalCommandTest, BasicLogicTest) {

@@ -2,10 +2,10 @@
 #include <iostream>
 #include <fstream>
 
-shell::CommandResult shell::ExternalCommand::executeInternalLogic(const VariablesStorage& variables) {
+shell::CommandResult shell::ExternalCommand::executeInternalLogic(const VariablesStorage &variables) {
   std::string commandString;
-  for (const auto& [name, value]: variables.GetVariables()) {
-      setenv(name.c_str(), value.c_str(), 1);
+  for (const auto&[name, value]: variables.GetVariables()) {
+    setenv(name.c_str(), value.c_str(), 1);
   }
 
   std::ostringstream out, err;
@@ -30,7 +30,7 @@ shell::CommandResult shell::ExternalCommand::executeInternalLogic(const Variable
   return {out.str(), err.str(), exit_code, false};
 }
 
-shell::ExternalCommand::ExternalCommand(std::vector<std::string>&& arguments,
-                                        std::string&& in_stream) :
-        shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream)) {
+shell::ExternalCommand::ExternalCommand(std::vector<std::string> &&arguments,
+                                        std::string &&in_stream) :
+    shell::CommandBase::CommandBase(std::move(arguments), std::move(in_stream)) {
 };
