@@ -35,5 +35,5 @@ TEST(WcCommandTest, InStreamTest) {
   auto command = new shell::WcCommand(std::move(arguments), stream.str());
   auto result = command->execute(shell::VariablesStorage{});
 
-  EXPECT_EQ(result.out_stream, expected_result);
+  EXPECT_EQ(result.out_stream, "1 1 5\n");
 }
