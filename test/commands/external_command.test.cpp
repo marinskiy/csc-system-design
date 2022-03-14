@@ -31,7 +31,11 @@ TEST(ExternalCommandTest, VariablesTest) {
   storage.SetVariable(name, value);
 
   std::vector<std::string> arguments;
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+  arguments.emplace_back("echo %VAR%");
+#else
   arguments.emplace_back("echo $VAR");
+#endif
 
   std::string in_stream;
   std::stringstream err_stream;

@@ -5,7 +5,7 @@
 shell::CommandResult shell::ExternalCommand::executeInternalLogic(const VariablesStorage &variables) {
   std::string commandString;
   for (const auto&[name, value]: variables.GetVariables()) {
-    commandString += name + "=" + value + " && ";
+    putenv((name + "=" + value).data());
   }
 
   std::ostringstream out, err;
