@@ -11,10 +11,6 @@
 shell::CommandBase *shell::CommandFactory::createCommand(CommandParams params,
                                                          std::string in_stream) {
   auto tokens = params.GetTokens();
-  if (tokens.size() == 0) {
-    //TODO: throw exception
-  }
-
   std::string command_name = tokens[0];
 
   if (command_name == "cat" || command_name == "echo" || command_name == "exit" || command_name == "pwd"
