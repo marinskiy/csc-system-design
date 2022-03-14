@@ -1,12 +1,15 @@
 #include "external_command.h"
 #include <iostream>
 #include <fstream>
-#include <stdlib.h>
 
 shell::CommandResult shell::ExternalCommand::executeInternalLogic(const VariablesStorage &variables) {
   std::string commandString;
   for (const auto&[name, value]: variables.GetVariables()) {
-    putenv((name + "=" + value).data());
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+    _putenv_s(name.c_str(), value.c_str());
+#else
+    setenv(name.c_str(), value.c_str(), 1);
+#endif
   }
 
   std::ostringstream out, err;
