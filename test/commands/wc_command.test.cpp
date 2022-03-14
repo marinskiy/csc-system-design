@@ -26,3 +26,14 @@ TEST(WcCommandTest, BasicLogicTest) {
 
   std::remove("test.txt");
 }
+
+TEST(WcCommandTest, InStreamTest) {
+  std::stringstream stream;
+  stream << "test" << std::endl;
+  std::vector<std::string> arguments;
+
+  auto command = new shell::WcCommand(std::move(arguments), stream.str());
+  auto result = command->execute(shell::VariablesStorage{});
+
+  EXPECT_EQ(result.out_stream, expected_result);
+}

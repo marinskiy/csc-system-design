@@ -9,5 +9,6 @@ class WcCommand : public CommandBase {
  private:
   CommandResult executeInternalLogic(const VariablesStorage& variables) override;
   int countWords(const std::string &s);
+  std::tuple<size_t, size_t> calculateStreamStats(std::istream& stream);
 };
 }
