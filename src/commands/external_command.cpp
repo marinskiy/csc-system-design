@@ -5,8 +5,9 @@
 shell::CommandResult shell::ExternalCommand::executeInternalLogic(const VariablesStorage& variables) {
   std::string commandString;
   for (const auto& [name, value]: variables.GetVariables()) {
-      commandString += name + "=" + value + " ";
+      setenv(name.c_str(), value.c_str(), 1);
   }
+
   std::ostringstream out, err;
   for (int i = 0; i < arguments_.size(); i++) {
     commandString += arguments_[i] + " ";

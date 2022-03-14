@@ -21,3 +21,20 @@ TEST(ExternalCommandTest, BasicLogicTest) {
   EXPECT_EQ(result.out_stream, expected_result);
 }
 
+TEST(ExternalCommandTest, VariablesTest) {
+  shell::VariablesStorage storage;
+  const auto name = "VAR";
+  const auto value = "test";
+  storage.SetVariable(name, value);
+
+  std::vector<std::string> arguments;
+  arguments.emplace_back("echo $VAR");
+
+  std::string in_stream;
+  std::stringstream err_stream;
+
+  auto command = new shell::ExternalCommand(std::move(arguments), std::move(in_stream));
+  auto result = command->execute(storage);
+
+  EXPECT_EQ(result.out_stream, "test\n");
+}
