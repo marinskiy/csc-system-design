@@ -48,4 +48,7 @@ TEST(ExternalCommandTest, VariablesTest) {
 #else
   EXPECT_EQ(result.out_stream, "test\n");
 #endif
+  EXPECT_EQ(result.err_stream, "");
+  EXPECT_EQ(result.exit_code, 0);
+  EXPECT_EQ(result.need_exit, false);
 }

@@ -3,6 +3,7 @@
 #include <memory>
 
 namespace shell {
+/** Structure for storing command results */
 struct CommandResult {
   std::string out_stream;
   std::string err_stream;
